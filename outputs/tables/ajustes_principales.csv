@@ -1,0 +1,4 @@
+﻿periodo,escenario,K_millones,K_modo,r_por_anio,N0_millones,puntos_usados_en_metricas,cotas_inferiores,RMSE_puntos_millones,R2_puntos_in_sample,maximo_incumplimiento_cota_millones
+2018-2024,K = 32 M (escenario fijo),32.0,fija,0.8479829096255819,0.816,6,1,2.2261321887517957,0.9216550256787408,0.0
+2018-2024,K = 37.1 M (escenario fijo),37.1,fija,0.8234856272145601,0.816,6,1,3.185983608656141,0.8395290890459717,0.0
+2018-2024,K libre (diagnóstico),22.398571859493984,libre,1.001081538649024,0.816,6,1,0.2770254713909125,0.9987867546124624,0.0

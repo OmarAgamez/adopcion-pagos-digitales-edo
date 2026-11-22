@@ -1,0 +1,4 @@
+﻿periodo,escenario,K_millones,K_modo,r_por_anio,N0_millones,puntos_usados_en_metricas,cotas_inferiores,RMSE_puntos_millones,R2_puntos_in_sample,maximo_incumplimiento_cota_millones
+2018-2025; 2025 = cuentas y con migración,K = 32 M (escenario fijo),32.0,fija,0.8479829096255822,0.816,7,1,2.1548781683149314,0.9501811481187887,0.0
+2018-2025; 2025 = cuentas y con migración,K = 37.1 M (escenario fijo),37.1,fija,0.8234856272145585,0.816,7,1,3.5357153098176135,0.865877126210147,0.0
+2018-2025; 2025 = cuentas y con migración,K libre (diagnóstico),27.400002740000062,libre,0.8818632440801564,0.816,7,1,1.3312254348679,0.9809869633298949,0.0

@@ -1,0 +1,22 @@
+﻿escenario,anio,id_observacion,observado_millones,predicho_millones,residuo_millones,tipo_observacion
+K = 32 M (escenario fijo),2018,nequi_2018,0.816,0.8160000000000001,-1.1102230246251565e-16,redondeada
+K = 32 M (escenario fijo),2019,nequi_2019,1.8,1.8425818669813478,-0.042581866981347805,redondeada
+K = 32 M (escenario fijo),2020,nequi_2020,4.8,3.9952071186009164,0.8047928813990834,redondeada
+K = 32 M (escenario fijo),2021,nequi_2021,10.0,7.995890408548561,2.0041095914514386,redondeada
+K = 32 M (escenario fijo),2022,nequi_2022_min,14.0,13.99999999999999,,cota_inferior; violacion=1.0658141036401503e-14
+K = 32 M (escenario fijo),2023,nequi_2023,18.598442,20.636599613587332,-2.038157613587334,exacta
+K = 32 M (escenario fijo),2024,nequi_2024,21.320389,25.893565207086628,-4.573176207086629,exacta
+K = 37.1 M (escenario fijo),2018,nequi_2018,0.816,0.8160000000000002,-2.220446049250313e-16,redondeada
+K = 37.1 M (escenario fijo),2019,nequi_2019,1.8,1.808348959597142,-0.008348959597141992,redondeada
+K = 37.1 M (escenario fijo),2020,nequi_2020,4.8,3.8785077566733257,0.9214922433266741,redondeada
+K = 37.1 M (escenario fijo),2021,nequi_2021,10.0,7.795090710194245,2.204909289805755,redondeada
+K = 37.1 M (escenario fijo),2022,nequi_2022_min,14.0,14.000000000000018,,cota_inferior; violacion=0.0
+K = 37.1 M (escenario fijo),2023,nequi_2023,18.598442,21.517430152207723,-2.9189881522077243,exacta
+K = 37.1 M (escenario fijo),2024,nequi_2024,21.320389,28.152051671642624,-6.831662671642626,exacta
+K libre (diagnóstico),2018,nequi_2018,0.816,0.816,0.0,redondeada
+K libre (diagnóstico),2019,nequi_2019,1.8,2.089494992506884,-0.28949499250688393,redondeada
+K libre (diagnóstico),2020,nequi_2020,4.8,4.899311318019375,-0.09931131801937543,redondeada
+K libre (diagnóstico),2021,nequi_2021,10.0,9.68560106270988,0.3143989372901199,redondeada
+K libre (diagnóstico),2022,nequi_2022_min,14.0,15.110245576730449,,cota_inferior; violacion=0.0
+K libre (diagnóstico),2023,nequi_2023,18.598442,19.026142634400077,-0.4277006344000789,exacta
+K libre (diagnóstico),2024,nequi_2024,21.320389,21.02881729734789,0.2915717026521101,exacta

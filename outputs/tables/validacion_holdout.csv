@@ -1,0 +1,5 @@
+﻿escenario,anio_entrenamiento_hasta,anio_evaluado,observado_millones,metrica_observada,predicho_millones,residuo_observado_menos_predicho,comparabilidad
+K = 32 M (fijo),2023,2024,21.320389,usuarios totales,25.893565207086635,-4.573176207086636,Comparable en definición general de usuarios totales reportados
+K = 32 M (fijo),2023,2025,27.4,cuentas en Nequi,29.064485599571487,-1.6644855995714885,"No plenamente comparable: cuentas en 2025, incorporación de A la Mano y cambio de definición"
+K = 37.1 M (fijo),2023,2024,21.320389,usuarios totales,28.1520516716426,-6.831662671642601,Comparable en definición general de usuarios totales reportados
+K = 37.1 M (fijo),2023,2025,27.4,cuentas en Nequi,32.558103327464316,-5.1581033274643175,"No plenamente comparable: cuentas en 2025, incorporación de A la Mano y cambio de definición"

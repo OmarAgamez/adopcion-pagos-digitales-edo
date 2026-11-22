@@ -1,6 +1,8 @@
-import numpy as np
+"""Compatibilidad con el módulo histórico; delega en el modelo central."""
+
+from adopcion_pagos.model import LogisticParameters, analytical_solution
 
 
 def logistico(t, r, K, N0):
-    """Solución analítica de dN/dt = r*N*(1 - N/K) con N(0) = N0."""
-    return K / (1 + ((K - N0) / N0) * np.exp(-r * t))
+    """Solución analítica; r y t deben usar unidades recíprocas/coherentes."""
+    return analytical_solution(t, LogisticParameters(K, N0, r))
