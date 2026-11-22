@@ -1,2 +1,6 @@
-# adopcion-pagos-digitales-edo
-Modelado de la curva de adopción de aplicaciones móviles de pagos digitales mediante EDOs de primer orden.
+# Modelado de la curva de adopción de la aplicación móvil de pagos digitales Nequi en Colombia mediante ecuaciones diferenciales de primer orden
+
+**Integrantes:**
+- Omar David Agamez Perez
+- Carlos Eduardo Camelo Montaño
+- Santiago Daniel Galviz Silva
