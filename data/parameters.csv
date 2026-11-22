@@ -1,0 +1,4 @@
+scenario,capacity_people,initial_adopters_people,growth_rate_per_month,duration_months,description
+lento,10000,500,0.20,24,Escenario hipotético ilustrativo; no corresponde a datos observados
+moderado,10000,500,0.35,24,Escenario base hipotético solicitado; no corresponde a datos observados
+rápido,10000,500,0.50,24,Escenario hipotético ilustrativo; no corresponde a datos observados
