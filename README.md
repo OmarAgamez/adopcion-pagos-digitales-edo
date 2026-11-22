@@ -84,22 +84,46 @@ En Windows, desde la raíz del repositorio, crea un entorno aislado e instala la
 ~~~powershell
 python -m venv .venv
 .\.venv\Scripts\python.exe -m pip install --upgrade pip
-.\.venv\Scripts\python.exe -m pip install -r requirements-dashboard.txt
+.\.venv\Scripts\python.exe -m pip install -r requirements.txt
 ~~~
 
 Inicia la aplicación local:
 
 ~~~powershell
-.\.venv\Scripts\python.exe -m streamlit run app.py
+.\.venv\Scripts\python.exe -m streamlit run app.py --server.address 127.0.0.1
 ~~~
 
 Para usar el comando directo tras activar el entorno virtual:
 
 ~~~powershell
 .\.venv\Scripts\Activate.ps1
-python -m streamlit run app.py
+python -m streamlit run app.py --server.address 127.0.0.1
 ~~~
 
-El archivo **requirements-dashboard.txt** fija Streamlit y reutiliza **requirements.txt** para SciPy, NumPy y Matplotlib. La aplicación no usa servicios externos, bases de datos ni autenticación.
+El archivo raíz **requirements.txt** fija Streamlit y conserva las versiones de SciPy, NumPy y Matplotlib usadas por el análisis científico. La aplicación no usa servicios externos, bases de datos ni autenticación.
 
 La navegación incluye inicio, simulador, análisis histórico, sensibilidad, validación matemática y datos/metodología. La reproducción histórica original de Omar y el ajuste integrado se presentan con tablas, métricas y observaciones independientes.
+
+## Despliegue en Streamlit Community Cloud
+
+La configuración de esta rama para Community Cloud es:
+
+- **Repositorio:** OmarAgamez/adopcion-pagos-digitales-edo
+- **Rama:** feat/dashboard-interactivo
+- **Main file path:** app.py
+- **Python:** 3.13
+
+El archivo raíz **requirements.txt** declara Streamlit 1.67.0 y todas las dependencias científicas fijadas por el proyecto. Community Cloud crea el entorno desde ese archivo y ejecuta la aplicación desde la raíz del repositorio. En el diálogo **Advanced settings**, selecciona Python 3.13 para usar la misma versión que el entorno local.
+
+Para desplegar el repositorio original, el propietario o una cuenta con permisos de administrador debe conectar GitHub a Streamlit Community Cloud y crear la aplicación con el repositorio, la rama y el archivo principal indicados arriba. La guía oficial describe los campos de repositorio, rama y ruta de entrada en [Deploy an app](https://docs.streamlit.io/deploy/streamlit-community-cloud/deploy-your-app/deploy); las dependencias se leen de [requirements.txt](https://docs.streamlit.io/deploy/streamlit-community-cloud/deploy-your-app/app-dependencies).
+
+### Alternativa mediante un fork
+
+Si no tienes permisos de administrador sobre el repositorio original:
+
+1. Crea un fork de **OmarAgamez/adopcion-pagos-digitales-edo** en tu cuenta de GitHub.
+2. Asegúrate de que el fork contenga la rama **feat/dashboard-interactivo**. Si no aparece automáticamente, publica en tu fork una rama con ese nombre basada en la rama publicada del repositorio original.
+3. En Streamlit Community Cloud, selecciona tu fork como repositorio, **feat/dashboard-interactivo** como rama y **app.py** como archivo principal.
+4. En **Advanced settings**, selecciona Python 3.13 y despliega. Los cambios de tu fork serán independientes del repositorio de Omar.
+
+Esta documentación prepara los parámetros de despliegue; no afirma que exista una instancia pública desplegada.
