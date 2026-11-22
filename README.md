@@ -74,3 +74,32 @@ El script crea tablas CSV en **outputs/tables/** y figuras PNG en **outputs/figu
 ## Informe y póster
 
 El informe original de Omar está integrado en **report/main.tex** y se conserva como documento principal, con sus tablas y resultados históricos. Las mejoras metodológicas de la integración se documentan por separado y no sustituyen automáticamente sus resultados. El diseño original de Canva no se modificó; no había integración disponible para crear una copia independiente.
+
+## Dashboard interactivo local
+
+La interfaz Streamlit reutiliza el modelo, los datos auditados y las tablas reproducibles que ya existen en el proyecto. Los controles mensuales son un ejemplo hipotético y permanecen separados del análisis histórico.
+
+En Windows, desde la raíz del repositorio, crea un entorno aislado e instala las dependencias del dashboard:
+
+~~~powershell
+python -m venv .venv
+.\.venv\Scripts\python.exe -m pip install --upgrade pip
+.\.venv\Scripts\python.exe -m pip install -r requirements-dashboard.txt
+~~~
+
+Inicia la aplicación local:
+
+~~~powershell
+.\.venv\Scripts\python.exe -m streamlit run app.py
+~~~
+
+Para usar el comando directo tras activar el entorno virtual:
+
+~~~powershell
+.\.venv\Scripts\Activate.ps1
+python -m streamlit run app.py
+~~~
+
+El archivo **requirements-dashboard.txt** fija Streamlit y reutiliza **requirements.txt** para SciPy, NumPy y Matplotlib. La aplicación no usa servicios externos, bases de datos ni autenticación.
+
+La navegación incluye inicio, simulador, análisis histórico, sensibilidad, validación matemática y datos/metodología. La reproducción histórica original de Omar y el ajuste integrado se presentan con tablas, métricas y observaciones independientes.
