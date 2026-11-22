@@ -1,0 +1,4 @@
+scenario,description,capacity_people,initial_adopters_people,growth_rate_per_month,duration_months,adopters_at_end_people,capacity_reached_percent,peak_adoption_rate_people_per_month,inflection_month,inflection_within_simulation,maximum_absolute_error_people
+lento,Escenario hipotético ilustrativo; no corresponde a datos observados,10000.0,500.0,0.2,24.0,8647.787093973539,86.47787093973538,500.0,14.722194895832201,True,7.380094757536426e-08
+moderado,Escenario base hipotético solicitado; no corresponde a datos observados,10000.0,500.0,0.35,24.0,9957.456972603944,99.57456972603944,875.0,8.412682797618402,True,6.418758857762441e-08
+rápido,Escenario hipotético ilustrativo; no corresponde a datos observados,10000.0,500.0,0.5,24.0,9998.832735919317,99.98832735919316,1250.0,5.8888779583328805,True,6.812661013100296e-08
