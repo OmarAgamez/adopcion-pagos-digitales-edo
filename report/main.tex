@@ -1,0 +1,256 @@
+\documentclass[12pt,a4paper]{article}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[spanish,es-tabla]{babel}
+\usepackage{amsmath,amssymb}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage[margin=2.5cm]{geometry}
+\usepackage{xurl}
+\usepackage[hidelinks]{hyperref}
+
+\title{Modelado de la curva de adopci\'on de la aplicaci\'on m\'ovil de pagos digitales Nequi en Colombia mediante ecuaciones diferenciales de primer orden}
+\author{Omar David Agamez Perez \and Carlos Eduardo Camelo Montaño \and Santiago Daniel Galviz Silva} 
+\date{Ecuaciones Diferenciales \\ Ingenier\'ia de Sistemas \\ Noviembre de 2026}
+
+\begin{document}
+\maketitle
+
+% =====================================================
+\section{Planteamiento del problema}
+
+Nequi es una aplicaci\'on m\'ovil de pagos digitales en Colombia. Seg\'un los reportes oficiales, pas\'o de 816\,000 usuarios vinculados a finales de 2018 a 27{,}4 millones a finales de 2025.~\cite{nequi_6anos,nequi_somos,elcolombiano2025} Este crecimiento r\'apido no puede ser indefinido, porque el n\'umero de personas que pueden usar la aplicaci\'on es limitado.
+
+\subsection{Pregunta de investigaci\'on}
+\textquestiondown Es posible describir la evoluci\'on del n\'umero de usuarios vinculados de Nequi entre 2018 y 2025 mediante una ecuaci\'on diferencial de primer orden de tipo log\'istico? Y de ser as\'i, \textquestiondown qu\'e techo de mercado $K$ es m\'as consistente con los datos?
+
+\subsection{Objetivo general}
+Modelar la curva de adopci\'on de Nequi en Colombia (2018--2025) mediante una ecuaci\'on diferencial de primer orden y evaluar su ajuste a datos oficiales.
+
+\subsection{Objetivos espec\'ificos}
+\begin{enumerate}
+  \item Formular el modelo log\'istico y explicar las hip\'otesis que lo sustentan.
+  \item Resolver la ecuaci\'on de forma anal\'itica y ajustar la tasa $r$ con datos reales para dos escenarios de $K$.
+  \item Validar el ajuste, se\~nalar sus limitaciones y dar recomendaciones.
+\end{enumerate}
+
+\subsection{Datos y alcance}
+La variable de estudio es el n\'umero acumulado de usuarios vinculados (no usuarios activos), con cortes a diciembre de cada a\~no. La Tabla~\ref{tab:datos} resume la serie. Las fuentes oficiales de 2022 y 2023 usan cifras redondeadas o ``m\'as de'', por lo que se tratan como valores aproximados y no como cifras exactas. Con solo ocho puntos anuales, los resultados deben interpretarse con cautela.
+
+\begin{table}[h]
+\centering
+\caption{Usuarios vinculados de Nequi (millones), cierre de diciembre.~\cite{nequi_6anos,nequi_somos,bancolombia4t24,elcolombiano2025}}
+\label{tab:datos}
+\begin{tabular}{cccl}
+\toprule
+A\~no & $t$ & $N$ (millones) & Tipo de dato \\
+\midrule
+2018 & 0 & 0{,}816 & exacto \\
+2019 & 1 & 1{,}8   & exacto \\
+2020 & 2 & 4{,}8   & exacto \\
+2021 & 3 & 10{,}0  & exacto \\
+2022 & 4 & 14{,}0  & aproximado \\
+2023 & 5 & 18{,}0  & cota inferior (``m\'as de'') \\
+2024 & 6 & 21{,}4  & exacto \\
+2025 & 7 & 27{,}4  & exacto \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+% =====================================================
+\section{Formulaci\'on del modelo}
+
+Sea $N(t)$ el n\'umero de usuarios vinculados (en millones) $t$ a\~nos despu\'es de diciembre de 2018. Se asume que:
+\begin{itemize}
+  \item Cuando hay pocos usuarios, el crecimiento es proporcional a $N$: cada usuario puede atraer a otros (recomendaci\'on boca a boca).
+  \item El mercado es finito: existe un techo $K$ de personas que pueden adoptar la aplicaci\'on.
+  \item A medida que $N$ se acerca a $K$, quedan menos personas por convencer y el crecimiento se frena.
+\end{itemize}
+
+Estas hip\'otesis conducen al modelo log\'istico:
+\begin{equation}
+  \frac{dN}{dt} = r\,N\left(1-\frac{N}{K}\right), \qquad N(0)=N_0=0{,}816,
+  \label{eq:logistica}
+\end{equation}
+donde $r>0$ es la tasa de crecimiento por a\~no cuando $N$ es peque\~no y $K>0$ es la capacidad de carga o techo del mercado. Se consideran dos escenarios para $K$, seg\'un los reportes de inclusi\'on financiera de 2024: $K=37{,}1$ millones (adultos con al menos un producto de dep\'osito)~\cite{bdo2024} y $K=32$ millones (adultos con cuenta de ahorro)~\cite{larepublica2024}.
+
+% =====================================================
+\section{Soluci\'on anal\'itica y num\'erica}
+
+\subsection{Soluci\'on anal\'itica}
+La ecuaci\'on~\eqref{eq:logistica} es de variables separables. Para $0<N<K$:
+\[
+  \frac{dN}{N\left(1-\frac{N}{K}\right)} = r\,dt
+  \quad\Longrightarrow\quad
+  \left(\frac{1}{N}+\frac{1}{K-N}\right)dN = r\,dt .
+\]
+Integrando ambos lados:
+\[
+  \ln N - \ln (K-N) = rt + C
+  \quad\Longrightarrow\quad
+  \frac{N}{K-N} = C_1\,e^{rt}.
+\]
+Con $N(0)=N_0$ se obtiene $C_1 = \dfrac{N_0}{K-N_0}$, y al despejar $N$:
+\begin{equation}
+  N(t)=\frac{K}{1+\left(\dfrac{K-N_0}{N_0}\right)e^{-rt}} .
+  \label{eq:solucion}
+\end{equation}
+Los puntos de equilibrio son $N=0$ (inestable) y $N=K$ (estable): para cualquier $N_0\in(0,K)$ se cumple $N(t)\to K$ cuando $t\to\infty$.
+
+\subsection{Ajuste num\'erico}
+Se fij\'o $N_0=0{,}816$ y se estim\'o $r$ por m\'inimos cuadrados no lineales (\texttt{scipy.optimize.curve\_fit}) con los ocho puntos de la Tabla~\ref{tab:datos}, para cada escenario de $K$. Como medida de error se us\'o la ra\'iz del error cuadr\'atico medio (RMSE). Tambi\'en se prob\'o un ajuste con $K$ libre como contraste.
+
+\begin{table}[h]
+\centering
+\caption{Resultados del ajuste log\'istico.}
+\label{tab:ajuste}
+\begin{tabular}{lcc}
+\toprule
+Escenario & $r$ (por a\~no) & RMSE (millones) \\
+\midrule
+$K=37{,}1$ (fijo)  & 0{,}729 & 2{,}13 \\
+$K=32{,}0$ (fijo)  & 0{,}788 & 1{,}61 \\
+$K$ libre ($K\to 27{,}4$) & 0{,}866 & 1{,}28 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.85\textwidth]{ajuste_logistico.png}
+\caption{Datos de Nequi y curvas log\'isticas ajustadas.}
+\label{fig:ajuste}
+\end{figure}
+
+% =====================================================
+\section{Validaci\'on y an\'alisis}
+
+\subsection{Residuos y m\'etricas de ajuste}
+Para medir qu\'e tan bien describe el modelo los datos se calcul\'o el residuo (dato menos modelo) de cada a\~no, la ra\'iz del error cuadr\'atico medio (RMSE) y el coeficiente de determinaci\'on $R^2$. Un residuo positivo significa que el modelo se qued\'o corto; uno negativo, que se pas\'o.
+
+\begin{table}[h]
+\centering
+\caption{Residuos del modelo (millones de usuarios).}
+\label{tab:residuos}
+\begin{tabular}{ccrr}
+\toprule
+A\~no & Dato & Residuo ($K=37{,}1$) & Residuo ($K=32$) \\
+\midrule
+2018 & 0{,}816 &  0{,}00 &  0{,}00 \\
+2019 & 1{,}8   &  0{,}15 &  0{,}06 \\
+2020 & 4{,}8   &  1{,}53 &  1{,}21 \\
+2021 & 10{,}0  &  3{,}80 &  3{,}04 \\
+2022 & 14{,}0  &  3{,}10 &  1{,}86 \\
+2023 & 18{,}0  &  0{,}82 & $-0{,}35$ \\
+2024 & 21{,}4  & $-2{,}39$ & $-2{,}51$ \\
+2025 & 27{,}4  & $-1{,}82$ & $-0{,}33$ \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{table}[h]
+\centering
+\caption{M\'etricas de ajuste y puntos clave de la curva.}
+\label{tab:metricas}
+\begin{tabular}{lp{3.8cm}p{3.8cm}}
+\toprule
+ & $K=37{,}1$ & $K=32$ \\
+\midrule
+$r$ (por a\~no) & 0{,}729 & 0{,}788 \\
+RMSE (millones) & 2{,}13 & 1{,}61 \\
+$R^2$ & 0{,}944 & 0{,}968 \\
+Punto de inflexi\'on ($N=K/2$) & $t=5{,}20$ (inicios de 2024) & $t=4{,}62$ (alrededor de agosto de 2023) \\
+$N=0{,}9\,K$ & $t=8{,}22$ (inicios de 2027) & $t=7{,}41$ (alrededor de mayo de 2026) \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.85\textwidth]{residuos.png}
+\caption{Residuos del modelo log\'istico para cada escenario de $K$.}
+\label{fig:residuos}
+\end{figure}
+
+El escenario $K=32$ millones se ajusta mejor que $K=37{,}1$ millones (menor RMSE y mayor $R^2$). En ambos casos el patr\'on es el mismo: el modelo se queda corto entre 2020 y 2022 (hasta 3{,}8 millones en 2021) y se pasa en 2024. Esto indica que el crecimiento real fue m\'as r\'apido al inicio y m\'as lento en 2024 de lo que permite una curva log\'istica, que es sim\'etrica alrededor de su punto de inflexi\'on. Una posible explicaci\'on del auge de 2020 es el efecto de la pandemia sobre los pagos digitales, pero estos datos no permiten comprobarla.
+
+\subsection{Prueba con datos reservados}
+Para probar la capacidad de predicci\'on, se ajust\'o $r$ usando \'unicamente los datos de 2018 a 2023 y se compar\'o la predicci\'on con los valores reales de 2024 y 2025.
+
+\begin{table}[h]
+\centering
+\caption{Predicci\'on de 2024 y 2025 usando solo datos hasta 2023 (millones).}
+\label{tab:holdout}
+\begin{tabular}{lcccc}
+\toprule
+Escenario & $r$ & Pred. 2024 / 2025 & Real 2024 / 2025 & Error 2024 / 2025 \\
+\midrule
+$K=37{,}1$ & 0{,}791 & 26{,}8 / 31{,}6 & 21{,}4 / 27{,}4 & $-5{,}4$ / $-4{,}2$ \\
+$K=32$     & 0{,}826 & 25{,}2 / 28{,}6 & 21{,}4 / 27{,}4 & $-3{,}8$ / $-1{,}2$ \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+En los dos escenarios el modelo sobreestima, pero el error es menor con $K=32$, sobre todo en 2025.
+
+\subsection{Comparaci\'on con un dato posterior}
+Una nota de prensa de mayo de 2026~\cite{bluradio2026} indica que Nequi ten\'ia ``cerca de 28 millones'' de usuarios. Este valor es aproximado y no es un cierre oficial, pero sirve como referencia. En $t=7{,}42$ (mayo de 2026), el modelo con $K=32$ predice 28{,}8 millones, y el modelo con $K=37{,}1$ predice 31{,}0 millones. Otra vez el escenario $K=32$ queda m\'as cerca de lo observado.
+
+\subsection{Limitaciones}
+\begin{itemize}
+  \item Se usan solo ocho puntos anuales, por lo que los par\'ametros estimados tienen mucha incertidumbre.
+  \item Los datos de 2022 y 2023 son aproximados o cotas inferiores.
+  \item El techo $K$ se asume constante, pero el mercado puede crecer (m\'as adultos, nuevos segmentos).
+  \item La variable es la de usuarios vinculados, no la de usuarios activos: a finales de 2025 hab\'ia 27{,}4 millones de cuentas y 21{,}9 millones activas.~\cite{elcolombiano2025}
+  \item El modelo log\'istico es sim\'etrico y no incluye factores externos como la competencia, la pandemia o cambios regulatorios.
+  \item Con $K$ libre, el ajuste elige un techo igual al \'ultimo dato (27{,}4 millones), lo cual no es cre\'ible porque Nequi sigui\'o creciendo; por eso no se usa como resultado principal.
+\end{itemize}
+
+% =====================================================
+\section{Interpretaci\'on y recomendaciones}
+
+\subsection{Interpretaci\'on}
+El modelo log\'istico con $K=32$ millones y $r\approx 0{,}79$ por a\~no describe razonablemente la adopci\'on de Nequi ($R^2\approx 0{,}97$). Seg\'un este modelo, el mayor crecimiento anual ocurri\'o alrededor de 2023, cuando la base lleg\'o a la mitad del techo, y desde entonces el crecimiento se desacelera. Las proyecciones son 29{,}9 millones en 2026, 31{,}0 millones en 2027 y 31{,}5 millones en 2028, es decir, la base se acercar\'ia al techo en pocos a\~nos. Si el techo real fuera $K=37{,}1$ millones, quedar\'ia un margen de crecimiento mayor, pero ese escenario se ajust\'o peor a los datos.
+
+\subsection{Recomendaciones}
+Estas recomendaciones se derivan del modelo y de sus limitaciones, y no son conclusiones definitivas.
+\begin{enumerate}
+  \item \textbf{Pasar de captar a activar usuarios.} Si la base se acerca al techo, conviene dar m\'as importancia a que los usuarios ya registrados usen la aplicaci\'on: a finales de 2025 unos 5{,}5 millones de cuentas no estaban activas.
+  \item \textbf{Buscar nuevos segmentos.} Para crecer m\'as all\'a de $K$, hay que ampliar el mercado potencial (por ejemplo, personas o negocios que hoy no usan servicios financieros formales).
+  \item \textbf{Mejorar el modelo.} Con datos trimestrales o mensuales, y con modelos que permiten un techo variable (o curvas asim\'etricas como Gompertz), se podr\'ia corregir el patr\'on de residuos observado.
+\end{enumerate}
+
+\subsection{Conclusiones}
+\begin{itemize}
+  \item Una EDO de primer orden de tipo log\'istico reproduce bien la forma de S de la adopci\'on de Nequi entre 2018 y 2025.
+  \item El techo $K=32$ millones (adultos con cuenta de ahorro) ajusta mejor que $K=37{,}1$ millones, tanto dentro de la muestra como en las pruebas de predicci\'on.
+  \item El modelo no captura bien el crecimiento r\'apido de 2020--2022 ni la desaceleraci\'on de 2024, lo que muestra los l\'imites de una curva sim\'etrica con solo ocho datos.
+\end{itemize}
+
+\begin{thebibliography}{9}
+
+\bibitem{nequi_6anos}
+Nequi. \emph{Nequi cumple 6 a\~nos de revoluci\'on digital, inclusi\'on y educaci\'on financiera} [comunicado de prensa]. Disponible en: \url{https://www.nequi.com.co/conocenos/sala-de-prensa/comunicado/nequi-cumple-6-anos-de-revolucion-digital-inclusion-y-educacion-financiera}. Consultado el 22 de noviembre de 2026.
+
+\bibitem{nequi_somos}
+Nequi. \emph{Sobre Nequi}. Disponible en: \url{https://www.nequi.com.co/personas/conocenos/somos-nequi}. Consultado el 22 de noviembre de 2026.
+
+\bibitem{bancolombia4t24}
+Bancolombia. \emph{Libro de resultados 4T24}. Disponible en: \url{https://www.accivalores.com/wp-content/uploads/Libro-de-resultados-Bancolombia-4T24.pdf}. Consultado el 22 de noviembre de 2026.
+
+\bibitem{elcolombiano2025}
+El Colombiano. \emph{Resultados de Grupo Cibest 2025}. Disponible en: \url{https://www.elcolombiano.com/negocios/resultados-grupo-cibest-2025-NJ33819217}. Consultado el 22 de noviembre de 2026.
+
+\bibitem{bdo2024}
+Superintendencia Financiera de Colombia. \emph{Para 2024, el 96,3\,\% de los colombianos adultos ten\'ia al menos un producto de dep\'osito o cr\'edito} [comunicado de prensa sobre el Reporte de Inclusi\'on Financiera 2024 de Banca de las Oportunidades y la Superfinanciera], 29 de mayo de 2025. Disponible en: \url{https://www.superfinanciera.gov.co/publicaciones/10115642/para-2024-el-963-de-los-colombianos-adultos-tenia-al-menos-un-producto-de-deposito-o-credito/}. Consultado el 22 de noviembre de 2026.
+
+\bibitem{larepublica2024}
+La Rep\'ublica. \emph{Inclusi\'on financiera en Colombia 2024}. Disponible en: \url{https://www.larepublica.co/finanzas/inclusion-financiera-en-colombia-2024-4145299}. Consultado el 22 de noviembre de 2026.
+
+\bibitem{bluradio2026}
+Blu Radio. \emph{Nequi alcanza los 28 millones de usuarios a 10 a\~nos de su creaci\'on}, 21 de mayo de 2026. Disponible en: \url{https://www.bluradio.com/economia/nequi-alcanza-los-28-millones-de-usuarios-a-10-anos-de-su-creacion-rg10}. Consultado el 22 de noviembre de 2026.
+
+\end{thebibliography}
+
+\end{document}
